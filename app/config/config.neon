@@ -9,7 +9,7 @@ common:
 
 	php:
 		date.timezone: Europe/Prague
-		# zlib.output_compression: yes
+		zlib.output_compression: yes
 
 
 	nette:
@@ -22,7 +22,7 @@ common:
 		database:
 			default:
 				dsn: 'mysql:host=localhost;dbname=test'
-				user:
+				user: root
 				password:
 
 
