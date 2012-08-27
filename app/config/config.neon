@@ -34,5 +34,19 @@ common:
 
 
 production < common:
+	parameters:
+		database:
+			driver: mysql
+			host:
+			dbname:
+			user:
+			password:
 
 development < common:
+	parameters:
+		database:
+			driver: mysql
+			host: localhost
+			dbname: maxmilian_6
+			user: root
+			password:
