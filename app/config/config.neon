@@ -7,6 +7,11 @@
 common:
 	parameters:
 		lang: cs
+		database:
+			dsn: '%database.driver%:host=%database.host%;dbname=%database.dbname%'
+			user: %database.user%
+			password: %database.password%
+			profiler: TRUE
 
 	php:
 		date.timezone: Europe/Prague
@@ -26,13 +31,6 @@ common:
 			expiration: +14 days
 			savePath: '%tempDir%/sessions'
 			cookieDomain: kysela.biz
-
-		database:
-			default:
-				dsn: '%database.driver%:host=%database.host%;dbname=%database.dbname%'
-				user: %database.user%
-				password: %database.password%
-				profiler: TRUE
 
 		debuger:
 			strictMode: TRUE
@@ -56,6 +54,13 @@ common:
 #			timeout:
 
 	services:
+		translator:
+			factory: NetteTranslator\Gettext::getTranslator
+			setup:
+				- addFile(%appDir%/AdminModule/langs, 'admin')
+				- addFile(%appDir%/FrontModule/langs, 'front')
+				- NetteTranslator\Panel::register
+		
 		cacheStorage:
 			class: Nette\Caching\Storages\FileStorage(%tempDir%)
 
@@ -67,7 +72,7 @@ common:
 
 		database: 
 			class: Nette\Database\Connection(
-				%database.dns%, 
+				'%database.driver%:host=%database.host%;dbname=%database.dbname%', 
 				%database.user%, 
 				%database.password%,
 				NULL,
@@ -78,13 +83,6 @@ common:
 				- $substitutions( %database.substitutions% )
 
 		authenticator: Authenticator
-
-		translator:
-			factory: NetteTranslator\Gettex::getTranslator
-			setup:
-				- addFile(%appDir%/AdminModule/langs, 'admin')
-				- addFile(%appDir%/FrontModule/langs, 'front')
-				- NetteTranslator\Panel::register
 
 
 	factories:
