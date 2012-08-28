@@ -14,7 +14,7 @@
 	<meta name="keywords" content="{$keywords}" n:ifset="$keywords">
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
 
-	<title>{block title|striptags|upper}{$title}{/block}</title>
+	<title n:ifset="$title">{block title|striptags|upper}{$title}{/block}</title>
 
 	<link rel="stylesheet/less" type="text/css" href="{$basePath}/ui/less/bootstrap.less">
 	<script src="less.js" type="text/javascript"></script>
