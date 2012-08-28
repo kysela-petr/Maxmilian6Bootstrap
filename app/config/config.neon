@@ -6,6 +6,7 @@
 #
 common:
 	parameters:
+		lang: cs
 
 	php:
 		date.timezone: Europe/Prague
@@ -13,19 +14,77 @@ common:
 
 
 	nette:
+		security:
+			frames: DENY
+
 		application:
 			errorPresenter: Error
 
 		session:
-			expiration: 14 days
+			autostart: smart
+			name: maxmilian6
+			expiration: +14 days
+			savePath: '%tempDir%/sessions'
+			cookieDomain: kysela.biz
 
 		database:
 			default:
-				dsn: 'mysql:host=localhost;dbname=test'
+				dsn: '%database.driver%:host=%database.host%;dbname=%database.dbname%'
+				user: %database.user%
+				password: %database.password%
+				profiler: TRUE
 
+		debuger:
+			strictMode: TRUE
+			catchExceptions: TRUE
+			email: kysela.biz®gmail.com
+			bar:
+				- JanDrabek\Diagnostics\MailPanel
+				- @sessionPanel
+
+		xhtml: no
+
+		mailer:
+			class: JanDrabek\Diagnostics\SessionDumpMail
+#		mailer:
+#			smtp: true
+#			host:
+#			port:
+#			username:
+#			password:
+#			secure:
+#			timeout:
 
 	services:
+		cacheStorage:
+			class: Nette\Caching\Storages\FileStorage(%tempDir%)
+
+		sessionPanel:
+			class: SessionPanel
+			arguments:
+				- @application
+				- @session
+
+		database: 
+			class: Nette\Database\Connection(
+				%database.dns%, 
+				%database.user%, 
+				%database.password%,
+				NULL,
+				Nette\Database\Reflection\DiscoveredReflection()
+			)
+			setup:
+				- setCacheStorage
+				- $substitutions( %database.substitutions% )
+
 		authenticator: Authenticator
+
+		translator:
+			factory: NetteTranslator\Gettex::getTranslator
+			setup:
+				- addFile(%appDir%/AdminModule/langs, 'admin')
+				- addFile(%appDir%/FrontModule/langs, 'front')
+				- NetteTranslator\Panel::register
 
 
 	factories:
@@ -39,6 +98,8 @@ production < common:
 			dbname:
 			user:
 			password:
+			substitutions:
+				db: test
 
 development < common:
 	parameters:
@@ -48,3 +109,5 @@ development < common:
 			dbname: maxmilian_6
 			user: root
 			password:
+			substitutions:
+				db:test
