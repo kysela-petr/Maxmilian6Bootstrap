@@ -1,0 +1,27 @@
+<?php //netteCache[01]000074a:2:{s:4:"time";s:21:"0.00628900 1346124476";s:6:"expire";i:1346729276;}?><!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
+
+	<link rel="stylesheet/less" type="text/css" href="/netbeans/maxmilian6/www/ui/less/bootstrap.less">
+	<script src="less.js" type="text/javascript"></script>
+	
+	<link rel="stylesheet" media="screen,projection,tv" href="/netbeans/maxmilian6/www/css/fam-icons.css" type="text/css">
+	<link rel="stylesheet" media="screen,projection,tv" href="/netbeans/maxmilian6/www/css/screen.css" type="text/css">
+	<link rel="stylesheet" media="print" href="/netbeans/maxmilian6/www/css/print.css" type="text/css">
+	<link rel="shortcut icon" href="/netbeans/maxmilian6/www/favicon.ico" type="image/x-icon">
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	<script type="text/javascript" src="/netbeans/maxmilian6/www/js/netteForms.js"></script>
+	
+</head>
+
+<body>
+	<script> document.body.className+=' js' </script>
+
+
+	
+</body>
+</html>

@@ -32,4 +32,25 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		}
 		return parent::flashMessage($message, $type);
 	}
+	
+	
+	public function createComponentJs()
+	{
+		$files = new \WebLoader\FileCollection(WWW_DIR . '/ui/js');
+		$files->addFiles(array(
+			'jquery-1.8.0.js', 
+			'netteForms.js', 
+			'nette.ajax.js', 
+			'bootstrap.js', 
+			'less-1.3.0.js', 
+			'extensions/diagnostic.dumps.ajax.js', 
+			'extensions/scrollTo.ajax.js', 
+			'extensions/spinner.ajax.js', 
+			'site.js'));
+
+		$compiler = \WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
+
+		return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
+	}
+	
 }
