@@ -34,21 +34,38 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	}
 	
 	
+	public function createComponentCss()
+	{
+		$files = new \WebLoader\FileCollection(WWW_DIR . '/ui');
+		$files->addFiles(Nette\Utils\Finder::findFiles('*.less')->from('/less'));
+		$files->addFiles(array(
+			'/plugins/colorpicker/less/colorpicker.less',
+			'/plugins/datepicker/less/datepicker.less',
+		));
+
+		$compiler = \WebLoader\Compiler::createCssCompiler($files, WEB_TEMP_DIR);
+
+		return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
+	}
+
+	
 	public function createComponentJs()
 	{
-		$files = new \WebLoader\FileCollection(WWW_DIR . '/ui/js');
+		$files = new \WebLoader\FileCollection(WWW_DIR . '/ui');
 		$files->addFiles(array(
-			'jquery-1.8.0.js', 
-			'netteForms.js', 
-			'nette.ajax.js', 
-			'bootstrap.js', 
-			'less-1.3.0.js', 
-			'extensions/diagnostic.dumps.ajax.js', 
-			'extensions/scrollTo.ajax.js', 
-			'extensions/spinner.ajax.js', 
-			'site.js'));
+			'/js/jquery-1.8.0.js', 
+			'/js/netteForms.js', 
+			'/js/nette.ajax.js', 
+			'/js/bootstrap.js', 
+			'/js/less-1.3.0.min.js', 
+			'/js/extensions/diagnostics.dumps.ajax.js', 
+			'/js/extensions/scrollTo.ajax.js', 
+			'/js/extensions/spinner.ajax.js', 
+			'/plugins/colorpicker/js/bootstrap-colorpicker.js', 
+			'/plugins/datepicker/js/bootstrap-datepicker.js',
+			'/js/site.js'));
 
-		$compiler = \WebLoader\Compiler::createJsCompiler($files, WWW_DIR . '/webtemp');
+		$compiler = \WebLoader\Compiler::createJsCompiler($files, WEB_TEMP_DIR);
 
 		return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
 	}

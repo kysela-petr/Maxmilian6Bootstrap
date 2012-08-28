@@ -16,7 +16,7 @@ define('LIBS_DIR', WWW_DIR . '/../libs');
 define('TEMP_DIR', WWW_DIR . '/../temp');
 
 // absolute filesystem path to the web temp
-define('WEB_TEMP_DIR', WWW_DIR . '/webTemp');
+define('WEB_TEMP_DIR', WWW_DIR . '/webtemp');
 
 // load bootstrap file
 require APP_DIR . '/bootstrap.php';
