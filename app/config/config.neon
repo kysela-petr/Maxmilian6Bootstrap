@@ -82,8 +82,9 @@ common:
 				- setCacheStorage
 				- $substitutions( %database.substitutions% )
 
-		authenticator: Authenticator
-
+		# AdminModule
+		AdminAuthenticator: AdminModule\Security\Authenticator( @database )
+		
 
 	factories:
 
