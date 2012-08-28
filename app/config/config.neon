@@ -99,15 +99,15 @@ production < common:
 			user:
 			password:
 			substitutions:
-				db: test
+				db: 
 
 development < common:
 	parameters:
 		database:
 			driver: mysql
 			host: localhost
-			dbname: maxmilian_6
+			dbname: maxmilian6
 			user: root
 			password:
 			substitutions:
-				db:test
+				db:m6_
