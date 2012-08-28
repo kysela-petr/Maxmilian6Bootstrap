@@ -84,7 +84,7 @@ common:
 
 		# AdminModule
 		AdminAuthenticator: AdminModule\Security\Authenticator( @database )
-		
+		AdminAuthorizator: AdminModule\Security\Acl
 
 	factories:
 
