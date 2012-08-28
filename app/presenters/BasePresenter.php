@@ -37,14 +37,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	public function createComponentCss()
 	{
 		$files = new \WebLoader\FileCollection(WWW_DIR . '/ui');
-		$files->addFiles(Nette\Utils\Finder::findFiles('*.less')->from('/less'));
 		$files->addFiles(array(
-			'/plugins/colorpicker/less/colorpicker.less',
-			'/plugins/datepicker/less/datepicker.less',
+			'/plugins/colorpicker/css/colorpicker.css',
+			'/plugins/datepicker/css/datepicker.css',
 		));
 
 		$compiler = \WebLoader\Compiler::createCssCompiler($files, WEB_TEMP_DIR);
 
+		$compiler->addFileFilter(new \Webloader\Filter\LessFilter());
+		
 		return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
 	}
 
@@ -57,7 +58,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 			'/js/netteForms.js', 
 			'/js/nette.ajax.js', 
 			'/js/bootstrap.js', 
-			'/js/less-1.3.0.min.js', 
 			'/js/extensions/diagnostics.dumps.ajax.js', 
 			'/js/extensions/scrollTo.ajax.js', 
 			'/js/extensions/spinner.ajax.js', 
