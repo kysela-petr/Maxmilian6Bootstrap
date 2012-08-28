@@ -18,7 +18,7 @@ $configurator = new Nette\Config\Configurator;
 $configurator->enableDebugger(__DIR__ . '/../log');
 
 // Enable RobotLoader - this will load all classes automatically
-$configurator->setTempDirectory(__DIR__ . '/../temp');
+$configurator->setTempDirectory(TEMP_DIR);
 $loader = $configurator->createRobotLoader()
 	->addDirectory(APP_DIR)
 	->addDirectory(LIBS_DIR)
