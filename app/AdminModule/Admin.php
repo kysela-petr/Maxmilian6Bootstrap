@@ -27,8 +27,9 @@ class Admin
 	 */
 	static function createRoutes(\Nette\Application\Routers\RouteList $router, $prefix)
     {
-        $router[] = $admin = new RouteList('Admin');
-                    $admin[] = new Route($prefix . '<presenter>/<action>[/<id>]', 'Homepage:default');
+        $admin = new RouteList('Admin');
+        $admin[] = new Route($prefix . '<presenter>/<action>[/<id>]', 'Homepage:default');
+        $router[] = $admin;
     }
 	
 }

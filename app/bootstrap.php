@@ -14,7 +14,7 @@ require LIBS_DIR . '/Nette/loader.php';
 $configurator = new Nette\Config\Configurator;
 
 // Enable Nette Debugger for error visualisation & logging
-//$configurator->setDebugMode($configurator::AUTO);
+$configurator->setDebugMode(FALSE);
 $configurator->enableDebugger(__DIR__ . '/../log');
 
 // Enable RobotLoader - this will load all classes automatically
@@ -36,10 +36,10 @@ Panel\ServicePanel::register($container, $loader);
 $container->router[] = new Route('index.php', 'Front:Homepage:default', Route::ONE_WAY);
 
 	// FrontModule Router
-	FrontModule\Front::createRoutes($container->router, '/');
+	FrontModule\Front::createRoutes($container->router, '');
 
     // AdminModule Router
-	AdminModule\Admin::createRoutes($container->router, '/_admin/');
+	AdminModule\Admin::createRoutes($container->router, '_admin/');
 
 
 // Configure and run the application!

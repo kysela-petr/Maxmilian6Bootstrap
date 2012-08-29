@@ -27,8 +27,9 @@ class Front
 	 */
 	static function createRoutes(\Nette\Application\Routers\RouteList $router, $prefix)
     {
-        $router[] = $admin = new RouteList('Front');
-                    $admin[] = new Route($prefix . '<presenter>/<action>[/<id>]', 'Homepage:default');
+        $front = new RouteList('Front');
+        $front[] = new Route($prefix . '[<presenter>][/<action>][/<id>]', 'Homepage:default');
+        $router[] = $front;
     }
 	
 }

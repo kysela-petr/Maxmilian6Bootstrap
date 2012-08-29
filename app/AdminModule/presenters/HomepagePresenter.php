@@ -1,6 +1,6 @@
 <?php
 
-namespace FrontModule;
+namespace AdminModule;
 
 /**
  * Homepage presenter.
