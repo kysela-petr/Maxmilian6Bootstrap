@@ -17,23 +17,26 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
 
 	/** 
-     * Jazyk aplikace
-     * @var string
+     * @var string | jazyk aplikace, tag html
      * @persistent */
 	public $lang = 'cs';
     
-    /**
-     * Název stránky
-     * @var string 
-     */
+    /** @var string | název stránky, tag title */
     public $title = 'Maxmilian 6';
 	    
+    /** @var string | popis stránky, tag meta description */
+    public $description = '';
+    
+    
+    /** @see \Nette\Application\UI\Presenter::beforeRender() */
     protected function beforeRender()
     {
         parent::beforeRender();
-        $this->template->lang = $this->lang; // <html lang="{$lang}">
-        $this->template->title = $this->title; // <title>{$lang}</title>
+        $this->template->lang = $this->lang;
+        $this->template->title = $this->title;
+        $this->template->description = $this->description;
     }
+    
     
     /*
      * PŘEKLADY APLIKACE
@@ -41,14 +44,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	
     /**
      * Překladač pro šablony
-     * @param type $class
-     * @return type
+     * @param string|NULL $class
+     * @return Nette\Templating\FileTemplate
      */
 	public function createTemplate($class = NULL)
 	{
 		$template = parent::createTemplate($class);
-
-		// pokud není nastaven, použijeme defaultní z configu
+        // pokud není nastaven, použijeme defaultní z configu
 		if (!isset($this->lang)) {
 			$this->lang = $this->context->parameters["lang"];
 		}
@@ -59,7 +61,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		return $template;
 	}
 	
-	
+	/**
+     * Překladač pro FlashMessage
+     * @param string $message
+     * @param string $type
+     * @return \stdClass
+     */
 	public function flashMessage($message, $type = "info")
 	{
 		if ($this->context->hasService("translator")) {
