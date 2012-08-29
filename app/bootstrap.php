@@ -33,11 +33,10 @@ Extras\Debug\ComponentTreePanel::register();
 Panel\ServicePanel::register($container, $loader);
 
 // Setup router
-	$container->router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
-	$container->router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
+$container->router[] = new Route('index.php', 'Front:Homepage:default', Route::ONE_WAY);
 
 	// FrontModule Router
-	FrontModule\Admin::createRoutes($container->router, '/');
+	FrontModule\Front::createRoutes($container->router, '/');
 
     // AdminModule Router
 	AdminModule\Admin::createRoutes($container->router, '/_admin/');
