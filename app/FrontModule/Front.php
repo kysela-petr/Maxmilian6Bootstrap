@@ -8,16 +8,17 @@ use Nette\Application\Routers\RouteList;
 /**
  * Front
  * =====
- * Základní třída modulu frontendu Maxmilian (http://www.kysela.biz/maxmilian)
- *
+ * Základní třída s nastavením Front Modulu
+ * 
  * @author Kysela Petr <petr®kysela.biz>
  * @copyright Copyright (c) 2012, Kysela Petr
- * @category Front
- * @package Front
+ * @category Class
+ * @package Maxmilian\Front
+ * @uses BasePresenter
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @version 6.0
+ * @version 6.0, 29.8.2012
  */
-class Front
+class Front extends \Nette\Object
 {
 
 	/**

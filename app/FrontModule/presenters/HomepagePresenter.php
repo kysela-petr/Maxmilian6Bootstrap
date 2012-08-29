@@ -9,11 +9,11 @@ namespace FrontModule;
  * 
  * @author Kysela Petr <petr®kysela.biz>
  * @copyright Copyright (c) 2012, Kysela Petr
- * @category MaxmilianPresenter
- * @package Front
+ * @category Presenter
+ * @package Maxmilian\Front
  * @uses \Front\BasePresenter
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @version 1.0, 28.8.2012
+ * @version 6.0, 28.8.2012
  */
 class HomepagePresenter extends BasePresenter
 {

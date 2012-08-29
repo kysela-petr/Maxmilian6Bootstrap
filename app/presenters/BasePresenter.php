@@ -1,14 +1,49 @@
 <?php
 
 /**
- * Base presenter for all application presenters.
+ * BasePresenter
+ * =====
+ * Základní presenter pro celou aplikaci Maxmilian
+ * 
+ * @author Kysela Petr <petr®kysela.biz>
+ * @copyright Copyright (c) 2012, Kysela Petr
+ * @category Presenter
+ * @package Maxmilian
+ * @uses BasePresenter
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version 6.0, 28.8.2012
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
 
-	/** @persistent */
+	/** 
+     * Jazyk aplikace
+     * @var string
+     * @persistent */
 	public $lang = 'cs';
+    
+    /**
+     * Název stránky
+     * @var string 
+     */
+    public $title = 'Maxmilian 6';
+	    
+    protected function beforeRender()
+    {
+        parent::beforeRender();
+        $this->template->lang = $this->lang; // <html lang="{$lang}">
+        $this->template->title = $this->title; // <title>{$lang}</title>
+    }
+    
+    /*
+     * PŘEKLADY APLIKACE
+     ************************************************************/
 	
+    /**
+     * Překladač pro šablony
+     * @param type $class
+     * @return type
+     */
 	public function createTemplate($class = NULL)
 	{
 		$template = parent::createTemplate($class);
@@ -32,42 +67,5 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 		}
 		return parent::flashMessage($message, $type);
 	}
-	
-	
-	public function createComponentCss()
-	{
-		$files = new \WebLoader\FileCollection(WWW_DIR . '/ui');
-		$files->addFiles(array(
-			'/plugins/colorpicker/css/colorpicker.css',
-			'/plugins/datepicker/css/datepicker.css',
-		));
 
-		$compiler = \WebLoader\Compiler::createCssCompiler($files, WEB_TEMP_DIR);
-
-		$compiler->addFileFilter(new \Webloader\Filter\LessFilter());
-		
-		return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
-	}
-
-	
-	public function createComponentJs()
-	{
-		$files = new \WebLoader\FileCollection(WWW_DIR . '/ui');
-		$files->addFiles(array(
-			'/js/jquery-1.8.0.js', 
-			'/js/netteForms.js', 
-			'/js/nette.ajax.js', 
-			'/js/bootstrap.js', 
-			'/js/extensions/diagnostics.dumps.ajax.js', 
-			'/js/extensions/scrollTo.ajax.js', 
-			'/js/extensions/spinner.ajax.js', 
-			'/plugins/colorpicker/js/bootstrap-colorpicker.js', 
-			'/plugins/datepicker/js/bootstrap-datepicker.js',
-			'/js/site.js'));
-
-		$compiler = \WebLoader\Compiler::createJsCompiler($files, WEB_TEMP_DIR);
-
-		return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
-	}
-	
 }

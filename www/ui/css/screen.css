@@ -1,11 +1,10 @@
 /* 
     Document   : style
     Created on : 28.8.2012, 6:11:38
-    Author     : petr
+    Author     : Kysela Petr <petr@kysela.biz>
     Description:
         Purpose of the stylesheet follows.
 */
-
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
     display: block;
@@ -8834,7 +8833,7 @@ a.label:hover, a.badge:hover {
     width: 16px;
 }
 #ajax-spinner {
-    background: url("http://localhost/netbeans/maxmilian6/www/ui/less/../img/spinner.gif") no-repeat scroll 50% 50% #FFFFFF;
+    background: url("http://localhost/netbeans/maxmilian6/www/ui/less/../images/spinner.gif") no-repeat scroll 50% 50% #FFFFFF;
     display: none;
     font-size: 0;
     margin: 15px 0 0 15px;
@@ -8845,5 +8844,3 @@ a[href^="error:"] {
     background: none repeat scroll 0 0 red;
     color: white;
 }
-
-

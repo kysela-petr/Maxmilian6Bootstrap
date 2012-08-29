@@ -6,7 +6,17 @@ use Nette\Diagnostics\Debugger,
 
 
 /**
- * Error presenter.
+ * ErrorPresenter
+ * =====
+ * Error presenter pro celou aplikaci Maxmilian
+ * 
+ * @author Kysela Petr <petr®kysela.biz>
+ * @copyright Copyright (c) 2012, Kysela Petr
+ * @category Presenter
+ * @package Maxmilian
+ * @uses BasePresenter
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version 6.0, 28.8.2012
  */
 class ErrorPresenter extends BasePresenter
 {
