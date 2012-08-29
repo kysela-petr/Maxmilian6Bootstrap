@@ -24,13 +24,13 @@ class Front extends \Nette\Object
 	/**
 	 * Vytvoření rout pro modul frontendu
 	 * @param \Nette\Application\Routers\RouteList $router
-	 * @param string $prefix | část URL adresy "/_admin/"
+	 * @param string $prefix | část URL adresy, například: front/
 	 */
 	static function createRoutes(\Nette\Application\Routers\RouteList $router, $prefix)
     {
-        $front = new RouteList('Front');
-        $front[] = new Route($prefix . '[<presenter>][/<action>][/<id>]', 'Homepage:default');
-        $router[] = $front;
+        $routs = new RouteList('Front');
+        $routs[] = new Route($prefix . '<presenter>/<action>][/<id>]', 'Homepage:default');
+        $router[] = $routs;
     }
 	
 }

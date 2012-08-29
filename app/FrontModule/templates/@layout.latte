@@ -48,8 +48,17 @@
 	<script> document.body.className+=' js' </script>
 
 	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-
-	{include #content}
+    
+    <ul class="nav nav-pills">
+        <li n:class="active">
+            <a n:href="Homepage:home">Home</a>
+        </li>
+        <li>
+            <a n:href="Homepage:default">Default</a>
+        </li>
+    </ul>       
+    
+    {include #content}
 	
 </body>
 </html>
