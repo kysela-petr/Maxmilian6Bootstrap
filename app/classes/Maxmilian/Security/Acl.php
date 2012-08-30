@@ -15,8 +15,11 @@ class Acl extends Permission
         $this->addRole('admin', 'editor'); // administrátor aplikace
         $this->addRole('root', 'admin'); // super administrátor aplikace
 
-        // resources
+        // resources FrontModule
         $this->addResource('Front:Homepage');
+        
+        // resources AdminModule
+        $this->addResource('Admin:Homepage');
 
         // privileges
 		$this->allow('quest', Permission::ALL, Permission::ALL);

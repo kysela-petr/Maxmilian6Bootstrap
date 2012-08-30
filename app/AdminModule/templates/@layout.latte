@@ -45,7 +45,7 @@
 
 </head>
 
-<body>
+<body id="admin-module">
 	<script> document.body.className+=' js' </script>
 
     <div class="container">
@@ -58,14 +58,8 @@
         <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active">
             <a n:href="Homepage:default"><i class="icon-info-sign"></i> Default</a>
         </li>
-        <li n:if="!$user->loggedIn" n:class="$presenter->isLinkCurrent('Sign:in') ? active">
-            <a n:href="Sign:in"><i class="icon-user"></i> Sign in</a>
-        </li>
         <li n:if="$user->loggedIn">
-            <a n:href=":Admin:Homepage:default"><i class="icon-key"></i> Admin</a>
-        </li>
-        <li n:if="$user->loggedIn">
-            <a n:href="Sign:out"><i class="icon-user"></i> Sign out</a>
+            <a n:href=":Front:Sign:out"><i class="icon-user"></i> Sign out</a>
         </li>
     </ul>       
 

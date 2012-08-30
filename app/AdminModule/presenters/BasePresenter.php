@@ -3,20 +3,89 @@
 namespace AdminModule;
 
 /**
- * Description of BasePresenter
- *
- * @author petr
+ * BasePresenter
+ * =====
+ * Základní presenter pro veškeré presentery FrontModulu 
+ * 
+ * @author Kysela Petr <petr®kysela.biz>
+ * @copyright Copyright (c) 2012, Kysela Petr
+ * @category Presenter
+ * @package Maxmilian\Front
+ * @uses \BasePresenter
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version 6.0, 28.8.2012
  */
 abstract class BasePresenter extends \BasePresenter
 {
 
-    /**
-     * (non-phpDoc)
-     *
-     * @see Nette\Application\Presenter#startup()
-     */
-    protected function startup() {
+    protected function startup()
+    {
         parent::startup();
+        
+        $user = $this->user;
+		
+		if(!$user->loggedIn){
+			if ($user->getLogoutReason() === \Nette\Security\IUserStorage::INACTIVITY) {
+                $this->flashMessage('Uběhla povolená doba nečinnosi, byli jste odhlášeni.', 'error');
+            }
+
+           $this->redirect(':Front:Sign:in', array('backlink' => $this->storeRequest()));
+		} else {
+            if (!$user->isAllowed($this->name, $this->action)) {
+                $this->flashMessage('Přístup zakázán. Nemáte oprávnění k zobrazení této stránky nebo provedení akce.', 'error');
+                $this->redirect('Homepage:default');
+            }
+        }
+        
     }
+
+
+    /*
+     * KOMPONENTY
+     ************************************************************/
+    
+    /**
+     * Komponenta vytvářející css styly pro Front Module
+     * @return \WebLoader\Nette\CssLoader
+     */
+	protected function createComponentCssFront()
+	{
+		$files = new \WebLoader\FileCollection(WWW_DIR . '/ui');
+		$files->addFiles(array(
+			'/plugins/colorpicker/css/colorpicker.css',
+			'/plugins/datepicker/css/datepicker.css',
+			__DIR__ . '/../style.css',
+		));
+
+		$compiler = \WebLoader\Compiler::createCssCompiler($files, WEB_TEMP_DIR);
+
+		$compiler->addFileFilter(new \Webloader\Filter\LessFilter());
+		
+		return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
+	}
+
+	/**
+     * Komponenta vytvářející java script pro Front Module
+     * @return \WebLoader\Nette\JavaScriptLoader
+     */
+	public function createComponentJsFront()
+	{
+		$files = new \WebLoader\FileCollection(WWW_DIR . '/ui');
+		$files->addFiles(array(
+			'/js/jquery-1.8.0.js', 
+			'/js/netteForms.js', 
+			'/js/nette.ajax.js', 
+			'/js/bootstrap.js', 
+			'/js/extensions/diagnostics.dumps.ajax.js', 
+			'/js/extensions/scrollTo.ajax.js', 
+			'/js/extensions/spinner.ajax.js', 
+			'/plugins/colorpicker/js/bootstrap-colorpicker.js', 
+			'/plugins/datepicker/js/bootstrap-datepicker.js',
+			'/js/site.js'));
+
+		$compiler = \WebLoader\Compiler::createJsCompiler($files, WEB_TEMP_DIR);
+
+		return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
+	}
 
 }
