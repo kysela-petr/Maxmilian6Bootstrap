@@ -9989,6 +9989,8 @@ $.nette.ext('init', {
 });
 
 })(window.jQuery);
+
+
 /* ===================================================
  * bootstrap-transition.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#transitions
@@ -12109,7 +12111,8 @@ $.nette.ext('spinner', {
 			id: 'ajax-spinner',
 			style: {
 				display: 'none'
-			}
+			},
+            html: '<div></div>'
 		});
 	},
 	spinner: null,

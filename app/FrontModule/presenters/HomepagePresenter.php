@@ -25,12 +25,12 @@ class HomepagePresenter extends BasePresenter
 
 	public function actionDefault()
     {
-        
+        $this->title = 'default | ' . $this->title;
 	}
 
 	public function actionHome()
     {
-        
+        $this->title = 'home | ' . $this->title;
 	}
     
     

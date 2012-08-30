@@ -35,6 +35,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->lang = $this->lang;
         $this->template->title = $this->title;
         $this->template->description = $this->description;
+        
+        // zAJAXování aplikace
+        if ($this->isAjax())
+        {
+            $this->invalidateControl();
+        }
+        
     }
     
     

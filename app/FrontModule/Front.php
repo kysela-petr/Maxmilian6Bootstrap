@@ -29,7 +29,7 @@ class Front extends \Nette\Object
 	static function createRoutes(\Nette\Application\Routers\RouteList $router, $prefix)
     {
         $routs = new RouteList('Front');
-        $routs[] = new Route($prefix . '<presenter>/<action>][/<id>]', 'Homepage:default');
+        $routs[] = new Route($prefix . '<presenter>/<action>[/<id>]', 'Homepage:default');
         $router[] = $routs;
     }
 	
