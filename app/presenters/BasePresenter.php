@@ -21,8 +21,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * @persistent */
 	public $lang = 'cs';
     
-    /** @var string | název stránky, tag title */
-    public $title = 'Maxmilian 6';
+    /** @var string | název aplikace */
+    public $appName = 'Maxmilian 6';
+    
+    /** @var string | titulek stránky, tag title */
+    public $title = '';
 	    
     /** @var string | popis stránky, tag meta description */
     public $description = '';

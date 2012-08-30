@@ -30,7 +30,6 @@ common:
             name: maxmilian6
             expiration: +14 days
             savePath: '%tempDir%/sessions'
-            cookieDomain: kysela.biz
 
         debuger:
             strictMode: TRUE
@@ -57,10 +56,11 @@ common:
         translator:
             factory: NetteTranslator\Gettext::getTranslator
             setup:
-                - addFile(%appDir%/AdminModule/langs, 'admin')
-                - addFile(%appDir%/FrontModule/langs, 'front')
+                - addFile(%appDir%/AdminModule/langs, admin)
+                - addFile(%appDir%/FrontModule/langs, front)
                 - NetteTranslator\Panel::register
-
+        
+        
         cacheStorage:
             class: Nette\Caching\Storages\FileStorage(%tempDir%)
 

@@ -20,7 +20,7 @@ class Tools extends \Nette\Object
 	
 	public static function passwordHash($password, $salt)
 	{
-		return hash('sha512', hash_hmac('sha256', sha1($password), sha1($salt), true));
+		return substr(hash('sha512', hash_hmac('sha256', sha1($password), sha1($salt), true)),0,128);
 	}
 
 

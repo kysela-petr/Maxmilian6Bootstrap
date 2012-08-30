@@ -19,7 +19,7 @@ class BootstrapForm extends \Nette\Application\UI\Form
 {
     
     /**
-     * Nastavení defaultního rendereru Twitter Bootstrap
+     * Nastavení defaultního rendereru a překladače
      * @param \Nette\ComponentModel\IContainer $parent
      * @param string $name
      */
@@ -27,6 +27,7 @@ class BootstrapForm extends \Nette\Application\UI\Form
     {
         parent::__construct($parent, $name);
         $this->setRenderer( new \Kdyby\Extension\Forms\BootstrapRenderer\BootstrapRenderer() );
+        $this->setTranslator($this->getPresenter()->context->translator);
     }
     
     

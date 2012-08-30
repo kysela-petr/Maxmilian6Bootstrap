@@ -27,13 +27,25 @@ class Authenticator extends \Nette\Object implements NS\IAuthenticator
 	public function authenticate(array $credentials)
     {
 		list($username, $password) = $credentials;
-        $row = $this->database->table('max_user')->where('email', $username)->fetch();
+        $row = $this->database
+                ->table('max_user')
+                ->select('max_user.*, max_user_role.role AS role')
+                ->where(array(
+                    'email' => $username,
+                    'active' => 'yes',
+                    'deleted' => 'no',
+                    ))
+                ->fetch();
 
+        //dump($row);
+        
 		if (!$row) {
 			throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
 		}
 
-		if ($row->password !== $p = \Kysela\Tools::passwordHash($password, $username) ) {
+        $passwordHash = \Kysela\Tools::passwordHash($password, $username);
+        
+        if ($row->password !== $passwordHash ) {
 			throw new NS\AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
 		}
 

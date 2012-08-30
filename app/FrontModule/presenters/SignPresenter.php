@@ -25,9 +25,9 @@ class SignPresenter extends BasePresenter
 	 * Sign in form component factory.
 	 * @return Nette\Application\UI\Form
 	 */
-	protected function createComponentSignInForm()
+	protected function createComponentSignInForm($name)
 	{
-		$form = new \Kysela\Forms\BootstrapForm;
+		$form = new \Kysela\Forms\BootstrapForm($this, $name);
 		$form->addText('username', 'Username:')
 			->setRequired('Please provide a username.');
 
@@ -64,14 +64,14 @@ class SignPresenter extends BasePresenter
 
     public function actionIn()
     {
-        $this->title = 'sign IN | ' . $this->title;
+        $this->title = 'sign IN | ' . $this->appName;
     }
 
 	public function actionOut()
 	{
 		$this->getUser()->logout();
 		$this->flashMessage('You have been signed out.');
-		$this->redirect('in');
+		$this->redirect('Homepage:default');
 	}
 
 }
