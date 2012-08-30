@@ -48,6 +48,7 @@
 <body>
 	<script> document.body.className+=' js' </script>
     
+    <div class="container">
     {dump $presenter->title}
     
     {snippet flashess}
@@ -56,11 +57,11 @@
     
     {snippet navigation}
     <ul class="nav nav-pills">
-        <li n:class="$presenter->isLinkCurrent('Homepage:home') ? active">
-            <a n:href="Homepage:home" class="ajax"><i class="icon-home"></i> Home</a>
-        </li>
         <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active">
-            <a n:href="Homepage:default" class="ajax">Default</a>
+            <a n:href="Homepage:default" class="ajax"><i class="icon-info-sign"></i> Default</a>
+        </li>
+        <li n:class="$presenter->isLinkCurrent('Sign:in') ? active">
+            <a n:href="Sign:in" class="ajax"><i class="icon-user"></i> Sign in</a>
         </li>
     </ul>       
     {/snippet}
@@ -68,6 +69,7 @@
     {snippet content}
     {include #content}
 	{/snippet}
+    </div>
     
 </body>
 </html>

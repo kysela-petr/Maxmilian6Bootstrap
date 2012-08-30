@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminModule\Security;
+namespace Maxmilian\Security;
 
 use Nette\Security\Permission;
 
@@ -9,18 +9,17 @@ class Acl extends Permission
     public function __construct()
     {
         // roles
-		$this->addRole('editor');
-        $this->addRole('admin', 'editor');
-		$this->addRole('root');
+		$this->addRole('quest'); // normální návštěvník aplikace
+        $this->addRole('customer', 'quest'); // registrovaný návštěvník aplikace
+        $this->addRole('editor', 'customer'); // správce aplikace s omezenými právy
+        $this->addRole('admin', 'editor'); // administrátor aplikace
+        $this->addRole('root', 'admin'); // super administrátor aplikace
 
         // resources
-        $this->addResource('Admin:Homepage');
+        $this->addResource('Front:Homepage');
 
         // privileges
-		$this->allow('editor', Permission::ALL, Permission::ALL);
-        $this->allow('admin', Permission::ALL, Permission::ALL);
-        
-		$this->allow('root', Permission::ALL, Permission::ALL);
+		$this->allow('quest', Permission::ALL, Permission::ALL);
     }
 }
 

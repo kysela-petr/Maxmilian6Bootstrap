@@ -14,7 +14,7 @@ use Nette\Application\Routers\RouteList;
  * @copyright Copyright (c) 2012, Kysela Petr
  * @category Class
  * @package Maxmilian\Front
- * @uses BasePresenter
+ * @uses \Nette\Object
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @version 6.0, 29.8.2012
  */

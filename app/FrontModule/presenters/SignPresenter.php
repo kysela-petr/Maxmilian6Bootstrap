@@ -1,13 +1,21 @@
 <?php
 
-namespace AdminModule;
+namespace FrontModule;
 
-use Nette\Application\UI,
-	Nette\Security as NS;
-
+use Nette\Security as NS;
 
 /**
- * Sign in/out presenters.
+ * SignPresenter
+ * =====
+ * Presenter pro přihlášení a odhlášení uživatelů
+ * 
+ * @author Kysela Petr <petr®kysela.biz>
+ * @copyright Copyright (c) 2012, Kysela Petr
+ * @category Presenter
+ * @package Maxmilian\
+ * @uses \BasePresenter
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @version 6.0, 30.8.2012
  */
 class SignPresenter extends BasePresenter
 {
@@ -19,7 +27,7 @@ class SignPresenter extends BasePresenter
 	 */
 	protected function createComponentSignInForm()
 	{
-		$form = new UI\Form;
+		$form = new \Kysela\Forms\BootstrapForm;
 		$form->addText('username', 'Username:')
 			->setRequired('Please provide a username.');
 
@@ -54,6 +62,10 @@ class SignPresenter extends BasePresenter
 	}
 
 
+    public function actionIn()
+    {
+        $this->title = 'sign IN | ' . $this->title;
+    }
 
 	public function actionOut()
 	{

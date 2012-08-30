@@ -5,108 +5,104 @@
 # http://nette.org/security-warning
 #
 common:
-	parameters:
-		lang: cs
-		database:
-			dsn: '%database.driver%:host=%database.host%;dbname=%database.dbname%'
-			user: %database.user%
-			password: %database.password%
-			profiler: TRUE
+    parameters:
+        lang: cs
+        database:
+            dsn: '%database.driver%:host=%database.host%;dbname=%database.dbname%'
+            user: %database.user%
+            password: %database.password%
+            profiler: TRUE
+            prefix: max_
 
-	php:
-		date.timezone: Europe/Prague
-		zlib.output_compression: yes
+    php:
+        date.timezone: Europe/Prague
+        zlib.output_compression: yes
 
+    nette:
+        security:
+            frames: DENY
 
-	nette:
-		security:
-			frames: DENY
+        application:
+            errorPresenter: Error
 
-		application:
-			errorPresenter: Error
+        session:
+            autostart: smart
+            name: maxmilian6
+            expiration: +14 days
+            savePath: '%tempDir%/sessions'
+            cookieDomain: kysela.biz
 
-		session:
-			autostart: smart
-			name: maxmilian6
-			expiration: +14 days
-			savePath: '%tempDir%/sessions'
-			cookieDomain: kysela.biz
+        debuger:
+            strictMode: TRUE
+            catchExceptions: TRUE
+            email: kysela.biz®gmail.com
+            bar:
+                - JanDrabek\Diagnostics\MailPanel
+                - @sessionPanel
 
-		debuger:
-			strictMode: TRUE
-			catchExceptions: TRUE
-			email: kysela.biz®gmail.com
-			bar:
-				- JanDrabek\Diagnostics\MailPanel
-				- @sessionPanel
+        xhtml: no
 
-		xhtml: no
+        mailer:
+        class: JanDrabek\Diagnostics\SessionDumpMail
+#        mailer:
+#           smtp: true
+#           host:
+#           port:
+#           username:
+#           password:
+#           secure:
+#           timeout:
 
-		mailer:
-			class: JanDrabek\Diagnostics\SessionDumpMail
-#		mailer:
-#			smtp: true
-#			host:
-#			port:
-#			username:
-#			password:
-#			secure:
-#			timeout:
+    services:
+        translator:
+            factory: NetteTranslator\Gettext::getTranslator
+            setup:
+                - addFile(%appDir%/AdminModule/langs, 'admin')
+                - addFile(%appDir%/FrontModule/langs, 'front')
+                - NetteTranslator\Panel::register
 
-	services:
-		translator:
-			factory: NetteTranslator\Gettext::getTranslator
-			setup:
-				- addFile(%appDir%/AdminModule/langs, 'admin')
-				- addFile(%appDir%/FrontModule/langs, 'front')
-				- NetteTranslator\Panel::register
-		
-		cacheStorage:
-			class: Nette\Caching\Storages\FileStorage(%tempDir%)
+        cacheStorage:
+            class: Nette\Caching\Storages\FileStorage(%tempDir%)
 
-		sessionPanel:
-			class: SessionPanel
-			arguments:
-				- @application
-				- @session
+        sessionPanel:
+            class: SessionPanel
+            arguments:
+                - @application
+                - @session
 
-		database: 
-			class: Nette\Database\Connection(
-				'%database.driver%:host=%database.host%;dbname=%database.dbname%', 
-				%database.user%, 
-				%database.password%,
-				NULL,
-				Nette\Database\Reflection\DiscoveredReflection()
-			)
-			setup:
-				- setCacheStorage
-				- $substitutions( %database.substitutions% )
+        database: 
+            class: Nette\Database\Connection(
+                '%database.driver%:host=%database.host%;dbname=%database.dbname%', 
+                %database.user%, 
+                %database.password%
+            )
+            setup:
+                - setCacheStorage
 
-		# AdminModule
-		AdminAuthenticator: AdminModule\Security\Authenticator( @database )
-		AdminAuthorizator: AdminModule\Security\Acl
+        Authenticator: Maxmilian\Security\Authenticator( @database )
+        Authorizator: Maxmilian\Security\Acl
 
-	factories:
+        # AdminModule
+                
+        # FrontModule
+
+    factories:
 
 
 production < common:
-	parameters:
-		database:
-			driver: mysql
-			host:
-			dbname:
-			user:
-			password:
-			substitutions:
-				db: 
-
+    parameters:
+        database:
+            driver: mysql
+            host:
+            dbname:
+            user:
+            password:
+            
 development < common:
-	parameters:
-		database:
-			driver: mysql
-			host: localhost
-			dbname: maxmilian6
-			user: root
-			password:
-			substitutions:
-				db:m6_
+    parameters:
+        database:
+            driver: mysql
+            host: localhost
+            dbname: maxmilian6
+            user: root
+            password:
